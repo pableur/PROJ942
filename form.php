@@ -25,23 +25,28 @@
 ?>
 
 
-<!doctype html>
 
+	<?php if(isset($_FILES['image']) and $_FILES['image']['error']==0){ 
+		
+		print(exec("python /mnt/hgfs/data/programme_v1/programme_lundi7.py ".$file_name." /mnt/hgfs/data/programme_v1/Base_jpg/"));
+	}else{?>
+		<!doctype html>
+		<html lang="en">
+		<head>
+		  <meta charset="utf-8">
 
-<html lang="en">
-<head>
-  <meta charset="utf-8">
+		  <title></title>
+		  <meta name="description" content="">
+		  <meta name="author" content="">
+		</head>
 
-  <title></title>
-  <meta name="description" content="">
-  <meta name="author" content="">
+		<body>
+		  <form action="" method="post" enctype="multipart/form-data">
+			<input type="file" name="image" capture>
+			<input name="name">
+		  </form>
+		</html>
+  <?php	
+	}  
+  ?>
 
-</head>
-
-<body>
-  <form action="" method="post" enctype="multipart/form-data">
-	<input type="file" name="image" capture>
-	<input name="name">
-  </form>
-</body>
-</html>
