@@ -24,6 +24,7 @@ public class HTTPsender extends Activity {
     private String filePath="";
     private String parametre[];
     private int serverResponseCode = 0;
+    private String serveurAnswer = "";
 
     public HTTPsender(String url, String filePath, String parametre[]){
         this.filePath=filePath;
@@ -123,8 +124,16 @@ public class HTTPsender extends Activity {
 
                 // Responses from the server (code and message)
                 serverResponseCode = conn.getResponseCode();
-                String serverResponseMessage = conn.getResponseMessage();
-
+                //String serverResponseMessage = conn.getResponseMessage();
+                reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String ligne;
+                String a="";
+                while ((ligne = reader.readLine()) != null) {
+                    a += ligne;
+                }
+                reader.close();
+                String serverResponseMessage=a.toString();
+                serveurAnswer=serverResponseMessage;
                 Log.i(TAG, "HTTP Response is : " + serverResponseMessage + ": " + serverResponseCode);
 
                 if(serverResponseCode == 200){
@@ -133,23 +142,7 @@ public class HTTPsender extends Activity {
                     Log.i(TAG,"Answer "+serverResponseMessage);
                 }
 
-                //close the streams //
-
                 dos.flush();
-                // On lit la réponse ici
-                /*
-                reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                String ligne;
-
-                String a="";
-                while ((ligne = reader.readLine()) != null) {
-                    a += ligne;
-                    Log.i(TAG,ligne);
-                }
-                Log.i(TAG,"answer "+a.toString());
-                reader.close();
-                reader.close();
-                */
                 dos.close();
                 fileInputStream.close();
 
@@ -165,5 +158,11 @@ public class HTTPsender extends Activity {
             return serverResponseCode;
 
         } // End else block
+    }
+    public int getServerResponseCode(){
+        return serverResponseCode;
+    }
+    public String getServeurAnswer(){
+        return serveurAnswer;
     }
 }
