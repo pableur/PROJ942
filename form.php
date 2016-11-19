@@ -32,19 +32,17 @@
 	}else{?>
 		<!doctype html>
 		<html lang="en">
-		<head>
-		  <meta charset="utf-8">
+			<head>
+			  <meta charset="utf-8">
 
-		  <title></title>
-		  <meta name="description" content="">
-		  <meta name="author" content="">
-		</head>
+			  <title></title>
+			</head>
 
-		<body>
-		  <form action="" method="post" enctype="multipart/form-data">
-			<input type="file" name="image" capture>
-			<input name="name">
-		  </form>
+			<body>
+			  <form action="" method="post" enctype="multipart/form-data">
+				<input type="file" name="image" capture>
+				<input name="name">
+			  </form>
 		</html>
   <?php	
 	}  
