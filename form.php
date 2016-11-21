@@ -1,7 +1,8 @@
 <?php
 	$name="none";
 	$file_name="none";
-	$pathUpload="/var/www/html/upload/";
+	//$pathUpload="/var/www/html/upload/";
+	$pathUpload="/mnt/hgfs/data/upload/";
 	if(isset($_POST['name']))
 		$name=$_POST['name'];
 	if(isset($_FILES['image']) and $_FILES['image']['error']==0){
@@ -28,7 +29,11 @@
 
 	<?php if(isset($_FILES['image']) and $_FILES['image']['error']==0){ 
 		
-		print(exec("python /mnt/hgfs/data/programme_v1/programme_lundi7.py ".$file_name." /mnt/hgfs/data/programme_v1/Base_jpg/"));
+		$name=exec("python /mnt/hgfs/data/programme_v1/programme_lundi7.py ".$file_name." /mnt/hgfs/data/programme_v1/Base_jpg/ ".$pathUpload." ");
+		print($name);
+		$monfichier = fopen($pathUpload.'name.txt', 'r+');
+		fputs($monfichier, $name);
+		fclose($monfichier);
 	}else{?>
 		<!doctype html>
 		<html lang="en">
